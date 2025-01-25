@@ -1,6 +1,7 @@
 package com.example.tugasakhirpam.ui.viewmodel.peserta
 
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -28,16 +29,22 @@ class HomePesertaViewModel(private val pesertaRepository: PesertaRepository) : V
 
     fun getPeserta() {
         viewModelScope.launch {
-            pesertaUiState = HomePesertaUiState.Loading
-            pesertaUiState = try {
-                HomePesertaUiState.Success(pesertaRepository.getPeserta())
+            try {
+                pesertaUiState = HomePesertaUiState.Loading
+                Log.d("HomePesertaViewModel", "Loading data...")
+                val pesertaList = pesertaRepository.getPeserta()
+                pesertaUiState = HomePesertaUiState.Success(pesertaList)
+                Log.d("HomePesertaViewModel", "Data loaded successfully.")
             } catch (e: IOException) {
-                HomePesertaUiState.Error
+                Log.e("HomePesertaViewModel", "IOException: ${e.message}")
+                pesertaUiState = HomePesertaUiState.Error
             } catch (e: HttpException) {
-                HomePesertaUiState.Error
+                Log.e("HomePesertaViewModel", "HttpException: ${e.message}")
+                pesertaUiState = HomePesertaUiState.Error
             }
         }
     }
+
 
     fun deletePeserta(idPeserta: String) {
         viewModelScope.launch {

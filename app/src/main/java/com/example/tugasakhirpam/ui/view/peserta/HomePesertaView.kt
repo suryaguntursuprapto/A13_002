@@ -48,7 +48,7 @@ import com.example.tugasakhirpam.ui.viewmodel.PenyediaViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomePesertaView(
+fun HomePesertaScreen(
     navigateToItemEntry: () -> Unit,
     modifier: Modifier = Modifier,
     onDetailClick: (String) -> Unit = {},
@@ -101,7 +101,7 @@ fun HomePesertaStatus(
     when (homeUiState) {
         is HomePesertaUiState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
 
-        is HomePesertaUiState.Success ->
+        is HomePesertaUiState.Success -> {
             if (homeUiState.peserta.isEmpty()) {
                 Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Text(text = "Tidak ada data Peserta")
@@ -110,17 +110,18 @@ fun HomePesertaStatus(
                 PesertaLayout(
                     peserta = homeUiState.peserta,
                     modifier = modifier.fillMaxWidth(),
-                    onDetailClick = {
-                        onDetailClick(it.idPeserta)
-                    },
-                    onDeleteClick = {
-                        onDeleteClick(it)
-                    }
+                    onDetailClick = { onDetailClick(it.idPeserta) },
+                    onDeleteClick = { onDeleteClick(it) }
                 )
             }
+        }
+
         is HomePesertaUiState.Error -> OnError(retryAction, modifier = modifier.fillMaxSize())
     }
 }
+
+
+
 
 @Composable
 fun OnLoading(modifier: Modifier = Modifier){
