@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.tugasakhirpam.ui.view.HalamanAwalKonser
+import com.example.tugasakhirpam.ui.view.event.DetailEventScreen
 import com.example.tugasakhirpam.ui.view.event.HomeEventScreen
 import com.example.tugasakhirpam.ui.view.peserta.HomePesertaScreen
 import com.example.tugasakhirpam.ui.view.peserta.DetailPesertaScreen
@@ -81,9 +82,24 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
             HomeEventScreen(
                 navigateToItemEntry = { navController.navigate(DestinasiInsertPeserta.route) },
                 onDetailClick = { idEvent ->
-                    navController.navigate(DestinasiDetailPeserta.route.replace("{id_event}", idEvent))
+                    navController.navigate(DestinasiDetailEvent.route.replace("{id_event}", idEvent))
                 },
                 navigateBack = { navController.popBackStack() }
+            )
+        }
+
+        // Detail Peserta Screen
+        composable(
+            route = DestinasiDetailEvent.route,
+            arguments = listOf(navArgument(DestinasiDetailEvent.idArg) { type = NavType.StringType })
+        ) { backStackEntry ->
+            val idEvent = backStackEntry.arguments?.getString(DestinasiDetailEvent.idArg) ?: ""
+            DetailEventScreen(
+                navigateBack = { navController.popBackStack() },
+                navigateToEdit = { id ->
+                    navController.navigate(DestinasiEditPeserta.createRoute(id))
+                },
+                id = idEvent
             )
         }
     }
