@@ -234,6 +234,23 @@ fun FormInput(
             )
         }
 
+        OutlinedTextField(
+            value = event.lokasiEvent,
+            onValueChange = { onValueChange(event.copy(lokasiEvent = it)) },
+            label = { Text("Lokasi Event") },
+            modifier = Modifier.fillMaxWidth(),
+            enabled = enabled,
+            singleLine = true,
+            isError = validationErrors?.lokasiEvent != null
+        )
+        validationErrors?.lokasiEvent?.let {
+            Text(
+                text = it,
+                color = Color.Red,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
+
         if (enabled) {
             Text(
                 text = "Isi Semua Data!",

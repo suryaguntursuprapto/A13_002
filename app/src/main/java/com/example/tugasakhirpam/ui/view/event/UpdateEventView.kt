@@ -145,6 +145,13 @@ fun UpdateEventForm(
             singleLine = true
         )
         OutlinedTextField(
+            value = updateEventEvent.lokasiEvent,
+            onValueChange = { onValueChange(updateEventEvent.copy(lokasiEvent = it)) },
+            label = { Text("Lokasi Event") },
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true
+        )
+        OutlinedTextField(
             value = updateEventEvent.deskripsiEvent,
             onValueChange = { onValueChange(updateEventEvent.copy(deskripsiEvent = it)) },
             label = { Text("Deskripsi Event") },

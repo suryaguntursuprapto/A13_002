@@ -138,17 +138,22 @@ fun DetailEventLayout(
                 modifier = Modifier.fillMaxWidth()
             )
             Text(
-                text = "Event Name: ${event.namaEvent}",
+                text = "Nama Event: ${event.namaEvent}",
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.fillMaxWidth()
             )
             Text(
-                text = "Event Date: ${event.tanggalEvent}",
+                text = "Tanggal Event: ${event.tanggalEvent}",
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.fillMaxWidth()
             )
             Text(
-                text = "Location: ${event.deskripsiEvent}",
+                text = "Deskripsi: ${event.deskripsiEvent}",
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.fillMaxWidth()
+            )
+            Text(
+                text = "Location: ${event.lokasiEvent}",
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.fillMaxWidth()
             )

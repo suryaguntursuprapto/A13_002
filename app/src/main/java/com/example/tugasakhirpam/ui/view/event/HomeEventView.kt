@@ -216,6 +216,10 @@ fun EventCard(
                 text = event.deskripsiEvent,
                 style = MaterialTheme.typography.titleMedium
             )
+            Text(
+                text = event.lokasiEvent,
+                style = MaterialTheme.typography.titleMedium
+            )
         }
     }
 }

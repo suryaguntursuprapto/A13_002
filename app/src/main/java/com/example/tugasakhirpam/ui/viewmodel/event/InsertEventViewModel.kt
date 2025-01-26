@@ -52,6 +52,11 @@ class InsertEventViewModel(private val eventRepository: EventRepository) : ViewM
             isValid = false
         }
 
+        if (uiState.insertEvent.lokasiEvent.isBlank()) {
+            validationErrors = validationErrors.copy(lokasiEvent = "Lokasi Event cannot be empty")
+            isValid = false
+        }
+
         return isValid
     }
 
@@ -81,7 +86,8 @@ data class InsertEventFormErrors(
     val idEvent: String? = null,
     val namaEvent: String? = null,
     val deskripsiEvent: String? = null,
-    val tanggalEvent: String? = null
+    val tanggalEvent: String? = null,
+    val lokasiEvent: String? = null
 )
 
 // Event data class representing the form fields
@@ -89,7 +95,8 @@ data class InsertEvent(
     val idEvent: String = "",
     val namaEvent: String = "",
     val deskripsiEvent: String = "",
-    val tanggalEvent: String = ""
+    val tanggalEvent: String = "",
+    val lokasiEvent: String = ""
 )
 
 // Convert InsertEvent to Event model
@@ -97,7 +104,8 @@ fun InsertEvent.toEvent(): Event = Event(
     idEvent = idEvent,
     namaEvent = namaEvent,
     deskripsiEvent = deskripsiEvent,
-    tanggalEvent = tanggalEvent
+    tanggalEvent = tanggalEvent,
+    lokasiEvent = lokasiEvent
 )
 
 // Convert Event model to UI state
@@ -110,5 +118,6 @@ fun Event.toInsertEvent(): InsertEvent = InsertEvent(
     idEvent = idEvent,
     namaEvent = namaEvent,
     deskripsiEvent = deskripsiEvent,
-    tanggalEvent = tanggalEvent
+    tanggalEvent = tanggalEvent,
+    lokasiEvent = lokasiEvent
 )

@@ -48,14 +48,15 @@ data class UpdateEventEvent(
     val namaEvent: String = "",
     val tanggalEvent: String = "",
     val lokasiEvent: String = "",
-    val deskripsiEvent: String = ""
+    val deskripsiEvent: String = "",
 )
 
 fun UpdateEventEvent.toEvent(): Event = Event(
     idEvent = idEvent,
     namaEvent = namaEvent,
     tanggalEvent = tanggalEvent,
-    deskripsiEvent = deskripsiEvent
+    deskripsiEvent = deskripsiEvent,
+    lokasiEvent = lokasiEvent
 )
 
 fun Event.toUpdateEventUiState(): UpdateEventUiState = UpdateEventUiState(
@@ -66,5 +67,6 @@ fun Event.toUpdateEventEvent(): UpdateEventEvent = UpdateEventEvent(
     idEvent = idEvent,
     namaEvent = namaEvent,
     tanggalEvent = tanggalEvent,
-    deskripsiEvent = deskripsiEvent
+    deskripsiEvent = deskripsiEvent,
+    lokasiEvent = lokasiEvent
 )

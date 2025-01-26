@@ -19,6 +19,9 @@ data class Event (
     val deskripsiEvent: String,
 
     @SerialName("tanggal_event")
-    val tanggalEvent: String
+    val tanggalEvent: String,
+
+    @SerialName("lokasi_event")
+    val lokasiEvent: String
 )
 
