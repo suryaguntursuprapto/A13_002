@@ -53,3 +53,13 @@ object DestinasiInsertEvent : DestinasiNavigasi {
     override val route = "Insert_event"
     override val titleRes = "Insert Event"
 }
+
+object DestinasiEditEvent : DestinasiNavigasi {
+    override val route = "edit_event/{id_event}"
+    override val titleRes = "Edit Event"
+    const val idArg = "id_event"
+
+    fun createRoute(idEvent: String): String {
+        return "edit_event/$idEvent"
+    }
+}
