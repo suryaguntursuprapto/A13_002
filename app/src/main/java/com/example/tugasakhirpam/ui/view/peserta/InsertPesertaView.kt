@@ -24,6 +24,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.tugasakhirpam.model.Peserta
+import com.example.tugasakhirpam.navigation.DestinasiInsertPeserta
 import com.example.tugasakhirpam.navigation.DestinasiNavigasi
 import com.example.tugasakhirpam.ui.customwidget.CostumeTopAppBar
 import com.example.tugasakhirpam.ui.viewmodel.peserta.InsertPesertaViewModel
@@ -33,11 +34,6 @@ import com.example.tugasakhirpam.ui.viewmodel.peserta.InsertPesertaFormErrors
 import com.example.tugasakhirpam.ui.viewmodel.peserta.toInsertPesertaEvent
 import com.example.tugasakhirpam.ui.viewmodel.peserta.toPeserta
 import kotlinx.coroutines.launch
-
-object DestinasiEntryPeserta : DestinasiNavigasi {
-    override val route = "peserta_entry"
-    override val titleRes = "Entry Peserta"
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,7 +49,7 @@ fun EntryPesertaScreen(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CostumeTopAppBar(
-                title = DestinasiEntryPeserta.titleRes,
+                title = DestinasiInsertPeserta.titleRes,
                 canNavigateBack = true,
                 scrollBehavior = scrollBehavior,
                 navigateUp = navigateBack
