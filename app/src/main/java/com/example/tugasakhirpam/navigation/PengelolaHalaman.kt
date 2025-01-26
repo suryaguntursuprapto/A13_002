@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.tugasakhirpam.ui.view.HalamanAwalKonser
 import com.example.tugasakhirpam.ui.view.event.DetailEventScreen
+import com.example.tugasakhirpam.ui.view.event.EntryEventScreen
 import com.example.tugasakhirpam.ui.view.event.HomeEventScreen
 import com.example.tugasakhirpam.ui.view.peserta.HomePesertaScreen
 import com.example.tugasakhirpam.ui.view.peserta.DetailPesertaScreen
@@ -80,11 +81,20 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
         // EVENT
         composable(DestinasiHomeEvent.route) {
             HomeEventScreen(
-                navigateToItemEntry = { navController.navigate(DestinasiInsertPeserta.route) },
+                navigateToItemEntry = { navController.navigate(DestinasiInsertEvent.route) },
                 onDetailClick = { idEvent ->
                     navController.navigate(DestinasiDetailEvent.route.replace("{id_event}", idEvent))
                 },
                 navigateBack = { navController.popBackStack() }
+            )
+        }
+
+        // Entry Peserta Screen
+        composable(DestinasiInsertEvent.route) {
+            EntryEventScreen(
+                navigateBack = {
+                    navController.popBackStack(DestinasiHomeEvent.route, inclusive = false)
+                }
             )
         }
 
