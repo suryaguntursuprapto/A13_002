@@ -1,5 +1,6 @@
 package com.example.tugasakhirpam.navigation
 
+import UpdateEventView
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -107,9 +108,21 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
             DetailEventScreen(
                 navigateBack = { navController.popBackStack() },
                 navigateToEdit = { id ->
-                    navController.navigate(DestinasiEditPeserta.createRoute(id))
+                    navController.navigate(DestinasiEditEvent.createRoute(id))
                 },
                 id = idEvent
+            )
+        }
+
+        // Update Peserta Screen
+        composable(
+            route = DestinasiEditEvent.route,
+            arguments = listOf(navArgument(DestinasiEditEvent.idArg) { type = NavType.StringType })
+        ) { backStackEntry ->
+            val idEvent = backStackEntry.arguments?.getString(DestinasiEditEvent.idArg) ?: ""
+            UpdateEventView(
+                idEvent = idEvent,
+                navigateBack = { navController.navigateUp() }
             )
         }
     }
