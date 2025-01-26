@@ -49,6 +49,7 @@ import com.example.tugasakhirpam.ui.viewmodel.PenyediaViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomePesertaScreen(
+    navigateBack: () -> Unit,
     navigateToItemEntry: () -> Unit,
     modifier: Modifier = Modifier,
     onDetailClick: (String) -> Unit = {},
@@ -60,7 +61,8 @@ fun HomePesertaScreen(
         topBar = {
             CostumeTopAppBar(
                 title = DestinasiHomePeserta.titleRes,
-                canNavigateBack = false,
+                canNavigateBack = true,
+                navigateUp = navigateBack,
                 scrollBehavior = scrollBehavior,
                 onRefresh = {
                     viewModel.getPeserta()
