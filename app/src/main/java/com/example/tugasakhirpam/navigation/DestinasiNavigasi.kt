@@ -42,3 +42,9 @@ object DestinasiHomeEvent : DestinasiNavigasi {
     override val route = "home_event"
     override val titleRes = "Home Event"
 }
+
+object DestinasiDetailEvent : DestinasiNavigasi {
+    override val route = "detail_event/{id_event}"
+    override val titleRes = "Detail Event"
+    const val idArg = "id_event"
+}
