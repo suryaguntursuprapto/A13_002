@@ -19,6 +19,7 @@ import com.example.tugasakhirpam.ui.view.peserta.DetailPesertaScreen
 import com.example.tugasakhirpam.ui.view.peserta.EntryPesertaScreen
 import com.example.tugasakhirpam.ui.view.peserta.UpdatePesertaForm
 import com.example.tugasakhirpam.ui.view.peserta.UpdatePesertaView
+import com.example.tugasakhirpam.ui.view.tiket.HomeTiketScreen
 
 @Composable
 fun PengelolaHalaman(navController: NavHostController = rememberNavController()) {
@@ -123,6 +124,17 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
             UpdateEventView(
                 idEvent = idEvent,
                 navigateBack = { navController.navigateUp() }
+            )
+        }
+
+        //Tiket
+        composable(DestinasiHomeTiket.route) {
+            HomeTiketScreen(
+                navigateToItemEntry = { navController.navigate(DestinasiInsertPeserta.route) },
+                onDetailClick = { idPeserta ->
+                    navController.navigate(DestinasiDetailPeserta.route.replace("{id_peserta}", idPeserta))
+                },
+                navigateBack = { navController.popBackStack() }
             )
         }
     }

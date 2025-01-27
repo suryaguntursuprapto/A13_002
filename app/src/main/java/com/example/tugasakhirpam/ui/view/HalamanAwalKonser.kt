@@ -20,6 +20,7 @@ import androidx.navigation.NavController
 import com.example.tugasakhirpam.navigation.DestinasiEditPeserta
 import com.example.tugasakhirpam.navigation.DestinasiHomeEvent
 import com.example.tugasakhirpam.navigation.DestinasiHomePeserta
+import com.example.tugasakhirpam.navigation.DestinasiHomeTiket
 import com.google.android.datatransport.Event
 
 @Composable
@@ -68,7 +69,7 @@ fun HalamanAwalKonser(navController: NavController) {
             MenuCard(
                 title = "Tiket",
                 icon = Icons.Default.MailOutline,
-                onClick = { navController.navigate("home_tiket") }
+                onClick = { navController.navigate(DestinasiHomeTiket.route) }
             )
             MenuCard(
                 title = "Transaksi",

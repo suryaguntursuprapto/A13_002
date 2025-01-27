@@ -63,3 +63,9 @@ object DestinasiEditEvent : DestinasiNavigasi {
         return "edit_event/$idEvent"
     }
 }
+
+//TIKET
+object DestinasiHomeTiket : DestinasiNavigasi {
+    override val route = "home_tiket"
+    override val titleRes = "Home Tiket"
+}

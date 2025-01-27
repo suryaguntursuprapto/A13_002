@@ -58,7 +58,7 @@ class KonserContainer : AppContainer {
     }
 
     override val tiketRepository: TiketRepository by lazy {
-        NetworkTiketRepository(tiketService)
+        NetworkTiketRepository(tiketService, eventService, pesertaService)
     }
 
     override val transaksiRepository: TransaksiRepository by lazy {

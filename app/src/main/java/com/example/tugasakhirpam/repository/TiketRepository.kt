@@ -1,6 +1,8 @@
 package com.example.tugasakhirpam.repository
 
 import com.example.tugasakhirpam.model.Tiket
+import com.example.tugasakhirpam.service_api.EventService
+import com.example.tugasakhirpam.service_api.PesertaService
 import com.example.tugasakhirpam.service_api.TiketService
 import okio.IOException
 
@@ -18,7 +20,9 @@ interface TiketRepository {
 }
 
 class NetworkTiketRepository(
-    private val tiketApiService: TiketService
+    private val tiketApiService: TiketService,
+    private val eventApiService: EventService, // Assuming you have a service for events
+    private val userApiService: PesertaService
 ) : TiketRepository {
 
     override suspend fun insertTiket(tiket: Tiket) {
@@ -44,10 +48,27 @@ class NetworkTiketRepository(
         }
     }
 
-    override suspend fun getAllTikets(): List<Tiket> =
-        tiketApiService.getAllTiket()
+    override suspend fun getAllTikets(): List<Tiket> {
+        val tiketList = tiketApiService.getAllTiket()
+
+        // Fetch event and user names for each tiket
+        return tiketList.map { tiket ->
+            val eventName = eventApiService.getEventById(tiket.idEvent)?.namaEvent ?: "Unknown Event"
+            val userName = userApiService.getPesertaById(tiket.idPengguna)?.namaPeserta ?: "Unknown User"
+
+            // Return a new Tiket with added eventName and userName
+            tiket.copy(idEvent = eventName, idPengguna = userName)
+        }
+    }
 
     override suspend fun getTiketById(idTiket: String): Tiket {
-        return tiketApiService.getTiketById(idTiket)
+        val tiket = tiketApiService.getTiketById(idTiket)
+
+        // Fetch event and user names for the specific tiket
+        val eventName = eventApiService.getEventById(tiket.idEvent)?.namaEvent ?: "Unknown Event"
+        val userName = userApiService.getPesertaById(tiket.idPengguna)?.namaPeserta ?: "Unknown User"
+
+        // Return a Tiket with added eventName and userName
+        return tiket.copy(idEvent = eventName, idPengguna = userName)
     }
-}
+} // Remove the extra brace here
