@@ -27,7 +27,6 @@ import com.example.tugasakhirpam.ui.viewmodel.transaksi.DetailTransaksiViewModel
 @Composable
 fun DetailTransaksiScreen(
     navigateBack: () -> Unit,
-    navigateToEdit: (String) -> Unit,
     id: String,
     viewModel: DetailTransaksiViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
@@ -44,15 +43,6 @@ fun DetailTransaksiScreen(
                 canNavigateBack = true,
                 navigateUp = navigateBack
             )
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = { navigateToEdit(id) },
-                shape = MaterialTheme.shapes.medium,
-                modifier = Modifier.padding(16.dp)
-            ) {
-                Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit Transaksi")
-            }
         }
     ) { innerPadding ->
         DetailTransaksiStatus(
