@@ -126,6 +126,7 @@ fun TransaksiLayout(
     }
 }
 
+
 @Composable
 fun TransaksiCard(
     transaksi: Transaksi,
