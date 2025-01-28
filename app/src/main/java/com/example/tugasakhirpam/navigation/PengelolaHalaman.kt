@@ -23,6 +23,7 @@ import com.example.tugasakhirpam.ui.view.tiket.DetailTiketScreen
 import com.example.tugasakhirpam.ui.view.tiket.EntryTiketScreen
 import com.example.tugasakhirpam.ui.view.tiket.HomeTiketScreen
 import com.example.tugasakhirpam.ui.view.tiket.UpdateTiketScreen
+import com.example.tugasakhirpam.ui.view.transaksi.HomeTransaksiScreen
 
 @Composable
 fun PengelolaHalaman(navController: NavHostController = rememberNavController()) {
@@ -171,6 +172,17 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
                 navigateBack = {
                     navController.popBackStack(DestinasiHomeTiket.route, inclusive = false)
                 }
+            )
+        }
+
+        //Transaksi
+        composable(DestinasiHomeTransaksi.route) {
+            HomeTransaksiScreen(
+                navigateToItemEntry = { navController.navigate(DestinasiInsertTiket.route) },
+                onDetailClick = { idTiket ->
+                    navController.navigate(DestinasiDetailTiket.route.replace("{id_tiket}", idTiket))
+                },
+                navigateBack = { navController.popBackStack() }
             )
         }
     }

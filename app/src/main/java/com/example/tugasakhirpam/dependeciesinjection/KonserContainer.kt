@@ -62,6 +62,6 @@ class KonserContainer : AppContainer {
     }
 
     override val transaksiRepository: TransaksiRepository by lazy {
-        NetworkTransaksiRepository(transaksiService)
+        NetworkTransaksiRepository(transaksiService, tiketService)
     }
 }

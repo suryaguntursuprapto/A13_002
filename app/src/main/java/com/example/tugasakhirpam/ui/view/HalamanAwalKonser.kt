@@ -21,6 +21,7 @@ import com.example.tugasakhirpam.navigation.DestinasiEditPeserta
 import com.example.tugasakhirpam.navigation.DestinasiHomeEvent
 import com.example.tugasakhirpam.navigation.DestinasiHomePeserta
 import com.example.tugasakhirpam.navigation.DestinasiHomeTiket
+import com.example.tugasakhirpam.navigation.DestinasiHomeTransaksi
 import com.google.android.datatransport.Event
 
 @Composable
@@ -74,7 +75,7 @@ fun HalamanAwalKonser(navController: NavController) {
             MenuCard(
                 title = "Transaksi",
                 icon = Icons.Default.ShoppingCart,
-                onClick = { navController.navigate("home_transaksi") }
+                onClick = { navController.navigate(DestinasiHomeTransaksi.route) }
             )
         }
     }

@@ -90,3 +90,9 @@ object DestinasiEditTiket : DestinasiNavigasi {
         return "edit_tiket/$idTiket"
     }
 }
+
+//TRANSAKSI
+object DestinasiHomeTransaksi : DestinasiNavigasi {
+    override val route = "home_transaksi"
+    override val titleRes = "Home Transaksi"
+}
