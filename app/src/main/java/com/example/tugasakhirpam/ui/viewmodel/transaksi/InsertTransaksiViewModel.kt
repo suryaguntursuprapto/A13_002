@@ -5,13 +5,35 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tugasakhirpam.model.Event
+import com.example.tugasakhirpam.model.Tiket
 import com.example.tugasakhirpam.model.Transaksi
+import com.example.tugasakhirpam.repository.TiketRepository
 import com.example.tugasakhirpam.repository.TransaksiRepository
 import kotlinx.coroutines.launch
 
-class InsertTransaksiViewModel(private val transaksiRepository: TransaksiRepository) : ViewModel() {
+class InsertTransaksiViewModel(
+    private val transaksiRepository: TransaksiRepository,
+    private val tiketRepository: TiketRepository
+) : ViewModel() {
     var uiState by mutableStateOf(InsertTransaksiUiState())
         private set
+    var daftarTiket by mutableStateOf(emptyList<Tiket>())
+        private set
+
+    init {
+        fetchTiket()
+    }
+
+    private fun fetchTiket() {
+        viewModelScope.launch {
+            try {
+                daftarTiket = tiketRepository.getAllTikets()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
 
     fun updateInsertTransaksiState(insertTransaksi: InsertTransaksi) {
         uiState = InsertTransaksiUiState(insertTransaksi = insertTransaksi)

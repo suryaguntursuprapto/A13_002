@@ -30,7 +30,11 @@ object PenyediaViewModel {
                 aplikasiKonser().container.eventRepository
             )
         }
-        initializer { InsertTransaksiViewModel(aplikasiKonser().container.transaksiRepository) }
+        initializer { InsertTransaksiViewModel(
+            aplikasiKonser().container.transaksiRepository,
+            aplikasiKonser().container.tiketRepository
+
+        ) }
 
         // Detail ViewModels
         initializer { DetailPesertaViewModel(aplikasiKonser().container.pesertaRepository) }
