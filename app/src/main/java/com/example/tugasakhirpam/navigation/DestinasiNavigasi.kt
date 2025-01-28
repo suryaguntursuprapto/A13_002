@@ -74,3 +74,9 @@ object DestinasiInsertTiket : DestinasiNavigasi {
     override val route = "Insert_tiket"
     override val titleRes = "Insert Tiket"
 }
+
+object DestinasiDetailTiket : DestinasiNavigasi {
+    override val route = "detail_tiket/{id_tiket}"
+    override val titleRes = "Detail Tiket"
+    const val idArg = "id_tiket"
+}

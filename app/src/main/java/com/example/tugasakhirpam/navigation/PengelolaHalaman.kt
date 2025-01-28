@@ -19,6 +19,7 @@ import com.example.tugasakhirpam.ui.view.peserta.DetailPesertaScreen
 import com.example.tugasakhirpam.ui.view.peserta.EntryPesertaScreen
 import com.example.tugasakhirpam.ui.view.peserta.UpdatePesertaForm
 import com.example.tugasakhirpam.ui.view.peserta.UpdatePesertaView
+import com.example.tugasakhirpam.ui.view.tiket.DetailTiketScreen
 import com.example.tugasakhirpam.ui.view.tiket.EntryTiketScreen
 import com.example.tugasakhirpam.ui.view.tiket.HomeTiketScreen
 
@@ -132,10 +133,24 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
         composable(DestinasiHomeTiket.route) {
             HomeTiketScreen(
                 navigateToItemEntry = { navController.navigate(DestinasiInsertTiket.route) },
-                onDetailClick = { idPeserta ->
-                    navController.navigate(DestinasiDetailPeserta.route.replace("{id_peserta}", idPeserta))
+                onDetailClick = { idTiket ->
+                    navController.navigate(DestinasiDetailTiket.route.replace("{id_tiket}", idTiket))
                 },
                 navigateBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(
+            route = DestinasiDetailTiket.route,
+            arguments = listOf(navArgument(DestinasiDetailTiket.idArg) { type = NavType.StringType })
+        ) { backStackEntry ->
+            val idTiket = backStackEntry.arguments?.getString(DestinasiDetailTiket.idArg) ?: ""
+            DetailTiketScreen(
+                navigateBack = { navController.popBackStack() },
+                navigateToEdit = { id ->
+                    navController.navigate(DestinasiEditEvent.createRoute(id))
+                },
+                id = idTiket
             )
         }
 
