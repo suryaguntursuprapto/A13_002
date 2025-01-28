@@ -102,3 +102,8 @@ object DestinasiDetailTransaksi : DestinasiNavigasi {
     override val titleRes = "Detail Transaksi"
     const val idArg = "id_transaksi"
 }
+
+object DestinasiInsertTransaksi : DestinasiNavigasi {
+    override val route = "Insert_transaksi"
+    override val titleRes = "Insert Transaksit"
+}
