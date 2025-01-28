@@ -5,13 +5,47 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tugasakhirpam.model.Event
+import com.example.tugasakhirpam.model.Peserta
 import com.example.tugasakhirpam.model.Tiket
+import com.example.tugasakhirpam.repository.EventRepository
+import com.example.tugasakhirpam.repository.PesertaRepository
 import com.example.tugasakhirpam.repository.TiketRepository
 import kotlinx.coroutines.launch
 
-class UpdateTiketViewModel(private val tiketRepository: TiketRepository) : ViewModel() {
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+
+class UpdateTiketViewModel(
+    private val tiketRepository: TiketRepository,
+    private val pesertaRepository: PesertaRepository,
+    private val eventRepository: EventRepository
+) : ViewModel() {
     var uiState by mutableStateOf(UpdateTiketUiState())
         private set
+
+    // Use StateFlow to store data for daftarPeserta and daftarEvent
+    var daftarPeserta by mutableStateOf(emptyList<Peserta>())
+        private set
+
+    var daftarEvent by mutableStateOf(emptyList<Event>())
+        private set
+
+    init {
+        fetchPesertaAndEvent()
+    }
+
+    private fun fetchPesertaAndEvent() {
+        viewModelScope.launch {
+            try {
+                daftarPeserta = pesertaRepository.getPeserta()
+                daftarEvent = eventRepository.getAllEvents()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
 
     fun updateUiState(updateTiketEvent: UpdateTiketEvent) {
         uiState = UpdateTiketUiState(updateTiketEvent = updateTiketEvent)
@@ -38,6 +72,7 @@ class UpdateTiketViewModel(private val tiketRepository: TiketRepository) : ViewM
         }
     }
 }
+
 
 data class UpdateTiketUiState(
     val updateTiketEvent: UpdateTiketEvent = UpdateTiketEvent()

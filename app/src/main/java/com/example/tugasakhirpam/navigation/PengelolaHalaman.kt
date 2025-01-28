@@ -22,6 +22,7 @@ import com.example.tugasakhirpam.ui.view.peserta.UpdatePesertaView
 import com.example.tugasakhirpam.ui.view.tiket.DetailTiketScreen
 import com.example.tugasakhirpam.ui.view.tiket.EntryTiketScreen
 import com.example.tugasakhirpam.ui.view.tiket.HomeTiketScreen
+import com.example.tugasakhirpam.ui.view.tiket.UpdateTiketScreen
 
 @Composable
 fun PengelolaHalaman(navController: NavHostController = rememberNavController()) {
@@ -148,9 +149,20 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
             DetailTiketScreen(
                 navigateBack = { navController.popBackStack() },
                 navigateToEdit = { id ->
-                    navController.navigate(DestinasiEditEvent.createRoute(id))
+                    navController.navigate(DestinasiEditTiket.createRoute(id))
                 },
                 id = idTiket
+            )
+        }
+
+        composable(
+            route = DestinasiEditTiket.route,
+            arguments = listOf(navArgument(DestinasiEditTiket.idArg) { type = NavType.StringType })
+        ) { backStackEntry ->
+            val idTiket = backStackEntry.arguments?.getString(DestinasiEditTiket.idArg) ?: ""
+            UpdateTiketScreen(
+                idTiket = idTiket,
+                navigateBack = { navController.navigateUp() }
             )
         }
 

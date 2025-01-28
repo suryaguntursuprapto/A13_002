@@ -41,7 +41,11 @@ object PenyediaViewModel {
         // Update ViewModels
         initializer { UpdatePesertaViewModel(aplikasiKonser().container.pesertaRepository) }
         initializer { UpdateEventViewModel(aplikasiKonser().container.eventRepository) }
-        initializer { UpdateTiketViewModel(aplikasiKonser().container.tiketRepository) }
+        initializer { UpdateTiketViewModel(
+            aplikasiKonser().container.tiketRepository,
+            aplikasiKonser().container.pesertaRepository,
+            aplikasiKonser().container.eventRepository
+        ) }
     }
 }
 fun CreationExtras.aplikasiKonser(): KonserApplications =

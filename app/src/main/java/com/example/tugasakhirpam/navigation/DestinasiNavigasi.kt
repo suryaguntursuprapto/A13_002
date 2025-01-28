@@ -80,3 +80,13 @@ object DestinasiDetailTiket : DestinasiNavigasi {
     override val titleRes = "Detail Tiket"
     const val idArg = "id_tiket"
 }
+
+object DestinasiEditTiket : DestinasiNavigasi {
+    override val route = "edit_tiket/{id_tiket}"
+    override val titleRes = "Edit Tiket"
+    const val idArg = "id_tiket"
+
+    fun createRoute(idTiket: String): String {
+        return "edit_tiket/$idTiket"
+    }
+}
