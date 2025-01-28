@@ -5,13 +5,42 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tugasakhirpam.model.Event
+import com.example.tugasakhirpam.model.Peserta
 import com.example.tugasakhirpam.model.Tiket
+import com.example.tugasakhirpam.repository.EventRepository
+import com.example.tugasakhirpam.repository.PesertaRepository
 import com.example.tugasakhirpam.repository.TiketRepository
 import kotlinx.coroutines.launch
 
-class InsertTiketViewModel(private val tiketRepository: TiketRepository) : ViewModel() {
+class InsertTiketViewModel(
+    private val tiketRepository: TiketRepository,
+    private val pesertaRepository: PesertaRepository,
+    private val eventRepository: EventRepository
+) : ViewModel() {
     var uiState by mutableStateOf(InsertTiketUiState())
         private set
+
+    var daftarPeserta by mutableStateOf(emptyList<Peserta>())
+        private set
+
+    var daftarEvent by mutableStateOf(emptyList<Event>())
+        private set
+
+    init {
+        fetchPesertaAndEvent()
+    }
+
+    private fun fetchPesertaAndEvent() {
+        viewModelScope.launch {
+            try {
+                daftarPeserta = pesertaRepository.getPeserta()
+                daftarEvent = eventRepository.getAllEvents()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
 
     fun updateInsertTiketState(insertTiket: InsertTiket) {
         uiState = InsertTiketUiState(insertTiket = insertTiket)
@@ -34,8 +63,8 @@ data class InsertTiketUiState(
 
 data class InsertTiket(
     val idTiket: String = "",
-    val idEvent: String = "", // Foreign Key ke Event.idEvent
-    val idPengguna: String = "", // Foreign Key ke Peserta.idPeserta
+    val idEvent: String = "",
+    val idPengguna: String = "",
     val kapasitasTiket: String = "",
     val hargaTiket: String = ""
 )
@@ -48,14 +77,4 @@ fun InsertTiket.toTiket(): Tiket = Tiket(
     hargaTiket = hargaTiket
 )
 
-fun Tiket.toUiStateTiket(): InsertTiketUiState = InsertTiketUiState(
-    insertTiket = toInsertTiket()
-)
 
-fun Tiket.toInsertTiket(): InsertTiket = InsertTiket(
-    idTiket = idTiket,
-    idEvent = idEvent,
-    idPengguna = idPengguna,
-    kapasitasTiket = kapasitasTiket,
-    hargaTiket = hargaTiket
-)

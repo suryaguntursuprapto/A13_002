@@ -5,6 +5,7 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.tugasakhirpam.KonserApplications
+import com.example.tugasakhirpam.repository.EventRepository
 import com.example.tugasakhirpam.ui.viewmodel.*
 import com.example.tugasakhirpam.ui.viewmodel.event.*
 import com.example.tugasakhirpam.ui.viewmodel.peserta.*
@@ -22,7 +23,13 @@ object PenyediaViewModel {
         // Insert ViewModels
         initializer { InsertPesertaViewModel(aplikasiKonser().container.pesertaRepository) }
         initializer { InsertEventViewModel(aplikasiKonser().container.eventRepository) }
-        initializer { InsertTiketViewModel(aplikasiKonser().container.tiketRepository) }
+        initializer {
+            InsertTiketViewModel(
+                aplikasiKonser().container.tiketRepository,
+                aplikasiKonser().container.pesertaRepository,
+                aplikasiKonser().container.eventRepository
+            )
+        }
         initializer { InsertTransaksiViewModel(aplikasiKonser().container.transaksiRepository) }
 
         // Detail ViewModels

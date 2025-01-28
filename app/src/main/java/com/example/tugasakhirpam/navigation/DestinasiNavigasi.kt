@@ -69,3 +69,8 @@ object DestinasiHomeTiket : DestinasiNavigasi {
     override val route = "home_tiket"
     override val titleRes = "Home Tiket"
 }
+
+object DestinasiInsertTiket : DestinasiNavigasi {
+    override val route = "Insert_tiket"
+    override val titleRes = "Insert Tiket"
+}
